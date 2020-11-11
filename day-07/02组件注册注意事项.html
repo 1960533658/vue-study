@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #app {
+      width: 500px;
+      height: 500px;
+      border: 1px solid green;
+    }
+
+    .gm {
+      width: 200px;
+      height: 200px;
+      border: 2px solid red
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <!-- 使用全局组件的名字以双标签的形式写在目标位置 -->
+    <hello-word></hello-word>
+    <!-- 不会出现标签与文字 -->
+    <HelloWord></HelloWord>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    /* 
+    使用组件的注意事项
+      如果组件的名称只一个单词。全部小写
+      如果组件的名称是多个单词，全部小写 并且用短横i吸纳隔开
+      如果使用的名称是驼峰明明组件。只能在字符串模板中使用该组件
+    */
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: "根挂件"
+        }
+      }
+    })
+
+    vm.component("hello-word", {
+      // 组件都有数据域
+      data() {
+        return {
+          info: '我是全局组件'
+        }
+      },
+      // 组件都有方法
+      methods: {
+        handle() {
+          this.info = "我是被点击之后的全局组件"
+        }
+      },
+      // 组件都有模板
+      template: `<div><div></div><div class="gm" @click="handle">{{info}}</div></div>`
+      // 不推荐使用以兄弟标签方式使用模板字符串
+      // template: `<div></div><div><div class="gm" @click="handle">{{info}}</div></div>`
+    })
+
+    vm.component("HelloWord", {
+      // 组件都有数据域
+      data() {
+        return {
+          info: '我是全局组件'
+        }
+      },
+      // 组件都有方法
+      methods: {
+        handle() {
+          this.info = "我是被点击之后的全局组件"
+        }
+      },
+      // 组件都有模板
+      template: `
+        <div>
+          <div></div>
+          <div class="gm" @click="handle">{{info}}</div>
+          <HelloWord></HelloWord>
+        </div>
+        `
+    })
+    vm.mount("#app")
+  </script>
+</body>
+
+</html>

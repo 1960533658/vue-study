@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./lib/axios.js"></script>
+  <script>
+    axios.defaults.baseURL = "http:localhost:3000"
+    async function queryData() {
+      var ret = await axios.get('adata');
+      console.log(ret.data);
+    }
+
+    // async function queryData() {
+    //   // 当出现了await之后就会让异步代码之后的同步代码运行完之后再运行同步代码
+    //   var ret = await new Promise(function (resolve, reject) {
+    //     setTimeout(function () {
+    //       resolve('nihao')
+    //     }, 1000);
+    //   })
+    //   console.log(ret);
+    // }
+    queryData().then(function (data) {
+      console.log(data);
+    })
+  </script>
+</body>
+
+</html>

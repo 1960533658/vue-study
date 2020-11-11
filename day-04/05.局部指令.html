@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-color="msg">
+    <input type="text" v-focus>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: {
+            color: "yellow"
+          }
+        }
+      },
+      methods: {},
+      // 局部指令
+      directives: {
+        /* 
+        指令名字： {
+          mounted() {
+
+          }
+        }
+        */
+        focus: {
+          mounted(el) {
+            el.focus();
+          }
+        },
+        color: {
+          mounted(el,binding) {
+            el.style.backgroundColor = binding.value.color
+          }
+        }
+      }
+    }).mount('#app')
+    // 全局指令vm.directives写在外面
+    // 局部写在methods的下面
+  </script>
+  </script>
+</body>
+
+</html>

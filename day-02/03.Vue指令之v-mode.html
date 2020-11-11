@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <input type="text" v-bind:value="msg"> -->
+    <!-- 双向事件绑定 msg的值影响标签的值，而v-model通过表单影响msg变量的值 -->
+    <input type="text" v-model="msg">
+    <p>{{msg}}</p>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    // V-mode 用于表单控件或者组件上创建双向绑定
+    // input select texterea components
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: "妹妹背着洋娃娃"
+        }
+      },
+      methods: {}
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

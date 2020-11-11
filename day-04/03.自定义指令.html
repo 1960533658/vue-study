@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-autofocus>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    /* 
+    除了核心功能默认内置的指令（v-model 和v-show），Vue也允许注册自定义指令
+    比如 autofocus子啊移动版safari上不工作。
+    */
+    let vm = Vue.createApp({})
+    // 1.全局自定义指令
+    // vm.directive("指令名称",{
+    //   mounted() {
+    //     // 功能
+    //   }
+    // })
+    vm.directive("autofocus", {
+      mounted(el) {
+        console.log(el);
+        el.focus()
+      }
+    })
+    vm.mount('#app')
+  </script>
+</body>
+
+</html>

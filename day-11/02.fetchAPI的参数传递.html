@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // get请求参数传递-Resful的URL  除了get请求之外要设置请求头和body
+    fetch('http://localhost:3000/books?id=kang').then(function (res) {
+      return res.text()
+    }).then(function (data) {
+      console.log(data);
+    })
+
+    // DELETE请求参数传递-Resful的URL  
+    fetch('http://localhost:3000/books/chun', {
+      method: 'DELETE',
+    }).then(function (res) {
+      return res.text()
+    }).then(function (data) {
+      console.log(data);
+    })
+
+    // POST请求参数传递-传统 POST和put请求要设置请求头和body
+    fetch('http://localhost:3000/books', {
+      method: "POST",
+      // 请求头
+      // body: "uname=zhangsan&pwd=123",
+      // headers: {
+      //   'content-type': 'application/x-www-form-urlencoded'
+      // }
+
+      // 如果没有字符格式的数据,只有对象格式的数据的话
+      body: JSON.stringify({
+        uname: '工行',
+        pwd: 'kklove'
+      }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    }).then(function (res) {
+      return res.text();
+    }).then(function (data) {
+      console.log(data);
+    })
+    // PUT请求参数传递-传统 POST和put请求要设置请求头和body
+    fetch('http://localhost:3000/books/123', {
+      method: "PUT",
+      body: JSON.stringify({
+        uname: "康某人",
+        pwd: '45656'
+      }),
+      headers: {
+        "content-type": "application/json"
+      }
+    }).then(function (res) {
+      return res.text();
+    }).then(function (data) {
+      console.log(data);
+    })
+  </script>
+</body>
+
+</html>

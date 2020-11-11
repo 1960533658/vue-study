@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .red {
+      color: red;
+    }
+
+    .weight {
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click='handleChange'>切换</button>
+    <!-- 如果 flag值为true 则red weight
+    如果 false 则red  -->
+    <p :class="[red, flag?weight:'']">你好</p>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          red: 'red',
+          weight: 'weight',
+          flag: true,
+        }
+      },
+      methods: {
+        handleChange() {
+          this.flag = !this.flag
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

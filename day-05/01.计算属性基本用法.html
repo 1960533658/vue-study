@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="number" class="num1" v-model='num1'>
+    <span>+</span>
+    <input type="number" class="num2" v-model='num2'>
+    <button @click='getSum'>=</button>
+    <input type="text" disabled class="sum" v-model='result'>
+    <input type="text" disabled class="sum" v-bind:value='getSum()'>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          num1: "",
+          num2: "",
+        }
+      },
+      methods: {
+        getSum: function () {
+          return this.num1 + this.num2
+        }
+      },
+
+      /* 
+      TODO
+      模板中放入太多的罗技会让模板过重且难以维护 使用计算属性可以让模板更加简洁
+      计算属性是基于他们的响应式依赖进行缓存的
+      computed比较合适多个变量或者对象进行处理后返回一个结果只,也就是多个变量中的某一个值发生了改变则我们监控的这个值也就会发生改变
+      TODO
+      */
+
+      // computed 计算**属性**
+      // 计算属性是基于他们的响应式依赖进行缓存的  
+      computed: {
+        result: function () {
+          // let sum = num1 + num2;
+          // return sum
+          return this.num1 + this.num2
+          // TODO: computed中的方法返回的值就相当于在data中保存了一个属性，可以直接设置
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

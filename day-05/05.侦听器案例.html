@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <span>用户名: </span>
+      <span>
+        <input type="text" v-model.lazy="uname">
+      </span>
+      <span>{{tip}}</span>
+    </div>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    /* 
+    分析:
+      1.在data中定义数据uname tip
+      2.在watch中监听uname
+      3.在watch中设置tip为正在验证中
+      4.调用定义好的方法验证uname的值是否存在(admin就是存在 请换一个 否则 就是可以用)
+    */
+    let vm = Vue.createApp({
+      data() {
+        return {
+          uname: "",
+          tip: ""
+        }
+      },
+      methods: {
+        checkName(name) {
+          // console.log(name);
+          if (name == 'admin') {
+            this.tip = "用户名已存在,请重新输入"
+          } else {
+            this.tip = "用户名可以使用"
+          }
+        }
+      },
+      computed: {
+
+      },
+      watch: {
+        uname(val) {
+          this.tip = "正在验证中"
+          this.checkName(val);
+        }
+      }
+    }).mount("#app")
+    /* 
+      相同点
+      1.都可以通过监控data数据域中属性值的变化来触发对应的回电函数，进而实现特殊的逻辑业务处理能力
+      不同点
+      1.触发条件不同
+        1 computed计算属性会依赖于使用它的data属性，只要是依赖的data属性有变动，则会重新调用计算属性执行一次，洼田崇则是在监控data属性值发生变动时自动调用watch回调函数
+      2.执行速度不同
+        1.computed计算属性的只是中介从缓存中获取，而不是重新编译执行一次，因而其性能要高一些，尤其是在data属性中的值无变化，而重复调用回调函数更是如此，所以说Vue中，应该尽可能多的谁用computed代替watch
+      3.使用方式不同
+        1.computed计算睡醒的回调函数方法可以直接在页面中通过插值表达式--{{}}来获取，此使我们不需要在data数据与中再定义一个与方法名相同的属性
+        2.watch中的方法名不是data数据域中所存在的，否则无法使用
+    */
+  </script>
+</body>
+
+</html>

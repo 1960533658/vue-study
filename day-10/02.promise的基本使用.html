@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Promise 是异步编程的一种解决方案,从语法上讲,Promise是一个对象, 从它可以获取一部操作的消息.
+    // 使用 Promise 主要有以下好处:
+    //  1.可以避免多层异步调用嵌套问题(回调地狱)
+    //  2.Promise 对象提供了舰导弹的API,使得控制异步操作更容易
+
+    // Promise 时一个构造函数
+    // console.log(new Promise());
+
+    console.dir(Promise)
+    // 这是处理消息
+    let p = new Promise(function (resolve, reject) {
+      // resolve 如果是正常响应 那么就把结果传给 resolve
+      // reject 如果是出现错误响应就把结果传给 reject
+      let flag = false;
+      if (flag) {
+        resolve("这是正常的结果")
+      } else {
+        reject("这是异常的结果")
+      }
+    })
+    // 这是获取消息
+    // p.then(成功时的回调函数,失败时的回调函数)
+    p.then(function (data) {
+      console.log(data);
+    }, function (err) {
+      console.log(err);
+    })
+  </script>
+</body>
+
+</html>

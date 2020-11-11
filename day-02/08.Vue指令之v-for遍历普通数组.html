@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for='item in aStar'>{{item}}</li>
+    </ul>
+    <ol>
+      <!-- item in 都是固定的参数 -->
+      <li v-for='item in aActor' :key='item.id'>{{item.name}}今年{{item.age}}有{{item.fans}}</li>
+    </ol>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          aStar: ['于文文', '佟丽娅', '高圆圆'],
+          aActor: [
+            {
+              id: 1,
+              name: '岳云鹏',
+              age: 23,
+              fans: '1000w'
+            },
+            {
+              id: 2,
+              name: '张云雷',
+              age: 23,
+              fans: '100w'
+            },
+            {
+              id: 3,
+              name: '郭麒麟',
+              age: 23,
+              fans: '200w'
+            },
+          ]
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

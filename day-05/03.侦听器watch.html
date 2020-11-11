@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 用输入的姓和名 组成 姓名 -->
+    <input type="text" v-model="firstname">
+    <input type="text" v-model="lastname">
+    <p>{{fullname}}</p>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          firstname: "kang",
+          lastname: "chun",
+          fullname: ""
+        }
+      },
+      watch: {
+        // watch 侦听 firstName属性  他所控制的所有的值都必须已存在data数据中
+        firstname(newValue, oldValue) {
+          console.log("新:" + newValue, "旧:" + oldValue);
+          this.fullname = newValue + this.lastname;
+        }
+      },
+    }).mount("#app")
+
+    /* 
+      普通函数、computed、watch之间的区别
+      普通方法需要调用
+      computed、watch自动执行
+      执行效率：computed>watch>methods（普通函数)
+      watch监听的是data中的属性 computed监听的是和功能相关的属性 methods中是事件调用的
+      watch监听的必须在data中出现 computed则不强制 methods更不强制
+    */
+  </script>
+</body>
+
+</html>

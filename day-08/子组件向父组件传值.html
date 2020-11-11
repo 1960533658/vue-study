@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <father></father>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({});
+    vm.component('father', {
+      data() {
+        return {
+
+        }
+      },
+      methods: {
+        fatherF(val) {
+          console.log("我司父组件的方法：" + val);
+        }
+      },
+      template: `
+        <div class="father">
+          <h3>父组件</h3>
+          <son @father="fatherF"></son>
+        </div>`
+    })
+    vm.component('son', {
+      data() {
+        return {
+          msg: '我是子组件添加的值'
+        }
+      },
+      template: `
+      <div class="son">
+        <h4 @click="$emit('father',msg)">
+          子组件
+        </h4>  
+      </div>
+      `
+    }).mount('#app')
+    // 给父组件注册自定义事件,@father="fatherF",给子组件使用点击事件@click="$emit(father,msg)"自动触发父组件的事件,$emit直接触发事件,第一个参数是要触发的事件名,第二个是,msg-->自己要传递出去的值
+  </script>
+</body>
+
+</html>

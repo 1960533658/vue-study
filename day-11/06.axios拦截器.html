@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./lib/axios.js"></script>
+  <script>
+    // 请求拦截器  作用是再请求发送钱进行一些操作 比如添加token 统一处理以后修改就会很容
+    // 响应拦截器 作用是再接收到响应后进行一些操作 比如服务器返回登陆状态失效,需要重新登陆时  跳转到登录页面
+    axios.interceptors.request.use(function (config) {
+      console.log(config.url);
+      config.headers.mytoken = 'sdsakkdsa';
+      return config;
+    }, function (err) {
+      console.log(err);
+    })
+    axios.interceptors.response.use(function (res) {
+      var data = res.data
+      return data
+    }, function (err) {
+      console.log(err);
+    })
+    axios.get('http://localhost:3000/adata').then(function(data) {
+      console.log(data);
+    })
+  </script>
+</body>
+
+</html>

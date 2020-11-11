@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <option value="+"></option>
+    <option value="-"></option>
+    <option value="*"></option>
+    <option value="/"></option>
+    <input type="text" v-model="n2">
+    <button>=</button>
+    <input type="text" readonly :value='result'>
+  </div>
+
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          n1: "",
+          opt: '',
+          n2: '',
+          result: null
+        }
+      },
+      methods: {
+        calc() {
+          let num1 = parseFloat(this.n1);
+          let num2 = parseFloat(this.n2);
+          let opt = this.opt;
+          switch (opt) {
+            case "+":
+              this.result = num1 + num2;
+              break;
+            case "-":
+              this.result = num1 - num2;
+              break;
+            case "-":
+              this.result = num1 * num2;
+              break;
+            case "-":
+              this.result = num1 / num2;
+              break;
+          }
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

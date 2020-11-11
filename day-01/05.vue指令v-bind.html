@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .like {
+      color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>{{msg}}</div>
+    <a v-bind:title='title' :class='colors' :href='link'>jiodsajdsaijckjncjash</a>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: 'hello',
+          colors: 'like',
+          title: '前往百度',
+          link: 'http://www.baidu.com'
+        }
+      },
+      methods: {}
+    })
+    vm.mount('#app')
+  </script>
+</body>
+
+</html>

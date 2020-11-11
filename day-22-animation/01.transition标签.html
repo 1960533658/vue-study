@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    p {
+      width: 200px;
+      height: 50px;
+      background: red;
+    }
+
+    .v-enter-from,
+    .v-leave-to {
+      transform: all 20s;
+      opacity: 0;
+    }
+
+    .v-leave-active {
+      width: 400px;
+      height: 100px;
+    }
+
+    .v-enter-to,
+    .v-leave-from {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="active=!active">按钮</button>
+    <transition>
+      <p v-if="active">我是内容</p>
+    </transition>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let app = Vue.createApp({
+      data() {
+        return {
+          active: true
+        }
+      }
+    }).mount("#app")
+  </script>
+</body>
+
+</html>

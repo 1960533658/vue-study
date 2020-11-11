@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./lib/axios.js"></script>
+  <script>
+    // axios get请求传递
+    axios.get('http://localhost:3000/axios?id=3434')
+      .then(function (res) {
+        console.log(res.data);
+      })
+
+    // axios delete请求传递
+    axios.delete('http://localhost:3000/axios?id=999')
+      .then(function (res) {
+        console.log(res.data)
+      })
+
+    // axios post请求传递
+    // axios.post('http://localhost:3000/axios', {
+    //   uname: "张三",
+    //   pwd: '12345'
+    // })
+    //   .then(function (res) {
+    //     console.log(res.data);
+    //   })
+
+    // 通过parms 添加参数
+    let parms = new URLSearchParams();
+    parms.append('uname', "lisi");
+    parms.append('pwd', "123456");
+    axios.post('http://localhost:3000/axios', parms)
+      .then(function (res) {
+        console.log(res.data);
+      })
+
+
+
+
+    // axios put请求传递
+
+  </script>
+</body>
+
+</html>

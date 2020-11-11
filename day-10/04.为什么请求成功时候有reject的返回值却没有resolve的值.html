@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>按钮</button>
+  <script>
+    let btn = document.querySelector('button');
+    btn.onclick = function () {
+      queryData("http://localhost:3000/data").then(function (data) {
+        console.log(data);
+        return queryData("http://localhost:3000/data1")
+      }).then(function (data) {
+        // 如果没有上一个than之后没有return返回值那么data为undefined
+        console.log(data);
+        return queryData("http://localhost:3000/data2")
+      }).then(function (data) {
+        console.log(data);
+      })
+
+    }
+    function queryData(url) {
+      let p = new Promise(function (resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        // 设置请求方式
+        xhr.open('get', url);
+        // 设置请求头
+        // 发送数据
+        xhr.send(null);
+        xhr.onreadystatechange = function () {
+          // 那么就让xhr.readyState为4时才能进入下列判断就能解决纸打印了reject的问题
+          if (xhr.readyState !== 4) return;
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            // 可以获取到后台返回的 "hello word" 但是同时也会返回reject的服务器错误
+            // 因为resolve和reject之中只能返回他们其中的一个，但返回一个之后就不会返回另外一个
+            // 在本段代码中因为监听申请数据的代码有0-4种，所以从为0开始reject就已经存在了，所以就算readystate的为4时resolve已经返回值缺也不会打印
+            // console.log(xhr.response);
+            resolve(xhr.responseText)
+          } else {
+            reject('服务器错误')
+          }
+        }
+      });
+      return p;
+    }
+  </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>按钮</button>
+  <script src="./lib/jquery.js"></script>
+  <script>
+    // $('button').click(function () {
+    //   // jQuery发起Ajax请求
+    //   $.ajax({
+    //     // 请求方式
+    //     type: 'get',
+    //     // 请求地址
+    //     url: "http://localhost:3000/data",
+    //     // 发送数据
+    //     data: null,
+    //     // 成功时的回调函数
+    //     success: function (data) {
+    //       console.log(data);
+    //     }
+    //   })
+    // })
+    // 以上输出结果为 hello word
+
+    // 现在需要需求按照顺序打印出 hello word ,hello TOM , hello JERRY 使用请求嵌套的方式
+
+    $('button').click(function () {
+      // jQuery发起Ajax请求
+      $.ajax({
+        // 请求方式
+        type: 'get',
+        // 请求地址
+        url: "http://localhost:3000/data",
+        // 发送数据
+        data: null,
+        // 成功时的回调函数
+        success: function (data) {
+          console.log(data);
+
+          // 内部嵌套获取TOM
+          // jQuery发起Ajax请求
+          $.ajax({
+            // 请求方式
+            type: 'get',
+            // 请求地址
+            url: "http://localhost:3000/data1",
+            // 发送数据
+            data: null,
+            // 成功时的回调函数
+            success: function (data) {
+              console.log(data);
+
+              // 内部嵌套获取JERRY  
+              // jQuery发起Ajax请求
+              $.ajax({
+                // 请求方式
+                type: 'get',
+                // 请求地址
+                url: "http://localhost:3000/data2",
+                // 发送数据
+                data: null,
+                // 成功时的回调函数
+                success: function (data) {
+                  console.log(data);
+                }
+              })
+            }
+          })
+        }
+      })
+    })
+    // 通过代码嵌套的方式可以解决异步代码按照顺序执行
+    // 但是嵌套代码 可读性差
+    // 我们把嵌套代码 也叫回调地狱
+
+    // 如何把嵌套代码变成面条代码 就要使用promise
+    // $('div').width(200).height(200).css().animate()
+  </script>
+</body>
+
+</html>

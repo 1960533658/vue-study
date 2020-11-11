@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 
+      .number  转数字
+      .trim    去空格
+      .lazy    当输入事件发成后（失焦）再同步数据
+     -->
+    <input type="text" id="age" v-model.trim="age">
+    <button @click="headleClick">点击</button>
+    <p>{{str}}</p>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          age: "",
+          str: ""
+        }
+      },
+      methods: {
+        headleClick() {
+          this.str = this.age
+          console.log(this.age + 1);
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+
+</html>

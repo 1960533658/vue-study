@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+
+    div,
+    p {
+      height: 100%;
+      width: 100%;
+    }
+
+    .hot {
+      background-color: hotpink;
+    }
+
+    .sky {
+      background-color: skyblue;
+    }
+
+    button {
+      float: left;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <button @click='handleChange'>toggle</button>
+    <p :class="[hot,flag?sky:hot]"></p>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          sky: 'sky',
+          hot: 'hot',
+          flag: true
+        }
+      },
+      methods: {
+        handleChange() {
+          console.log(111);
+          this.flag = !this.flag
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

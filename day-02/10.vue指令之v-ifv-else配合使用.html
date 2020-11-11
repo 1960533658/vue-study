@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 根据true的值判断他们两个是否相等，true的话就选第一个值，false的会就进入else -->
+    <p v-if='flag'>我是真的帅</p>
+    <p v-else='flag'>我不仅丑而且还想的美</p>
+    <!-- <p v-else-if='flag'>刚才说错了，其实我很丑</p> -->
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          flag: false
+        }
+      },
+      methods: {}
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

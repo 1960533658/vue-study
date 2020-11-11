@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>{{msg}}</div>
+
+  <div id="app">
+    <p v-on:click="handleClick" @mouseenter="handleMouseenter">{{content}}</p>
+  </div>
+  <!-- 引入vue库文件，当引入之后就会在全局对象window中就有了一个Vue的实例对象 -->
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    // 写数据
+    let vm = Vue.createApp({
+      // 有过要存数据
+      data() {
+        return {
+          // 所有页面数据写在这里
+          content: '点我看啊看',
+          people: "苹果"
+        }
+      },
+      // 所有的自定义函数的方法都写在这里
+      methods: {
+        //推荐 方法1 es6的信誉发
+        handleClick() {
+          alert('我被点击了')
+        },
+        // 方法2
+        handleMouseenter: function (name) {
+          alert('我被' + this.people + '点击了')
+        }
+      }
+    })
+    // 写控制器
+    vm.mount('#app')
+  </script>
+</body>
+
+</html>

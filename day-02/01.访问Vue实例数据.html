@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">{{msg}}</div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    // let vm = Vue.createApp({
+    //   data() {
+    //     return {
+    //       msg: '今天你吃了吗'
+    //     }
+    //   },
+    //   methods: {}
+    // }).mount('#app')
+    // console.log(vm.$data.msg);
+
+
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: '今天你吃了吗',
+          name: 'kk'
+        }
+      },
+      methods: {}
+    }).mount('#app')
+    console.log(vm.$data.name)
+  </script>
+</body>
+
+</html>

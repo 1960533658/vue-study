@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let p = new Promise(function (resolve, reject) {
+      // resolve("这是正确的结果")
+      reject("这是错误的结果")
+    })
+    p.then(function (data) {
+      console.log(data);
+    }, function (data) {
+      console.log(data);
+      // finally 成功与否都会执行
+    }).finally(function (data) {
+      console.log("finally完成了");
+    })
+    // then 得到异步任务正确的结果
+    // catch 获取异步任务轧辊错误的结果
+    p.then(function (data) {
+      console.log(data);
+    }).catch(function (data) {
+      console.log('我这里有错误');
+    })
+
+  </script>
+</body>
+
+</html>

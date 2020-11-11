@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    form div {
+      height: 40px;
+      line-height: 40px;
+    }
+
+    form div:nth-child(4) {
+      height: auto;
+    }
+
+    form div span:first-child {
+      display: inline-block;
+      width: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="http://itcast.cn" id="app">
+    <div>
+      <span>姓名：</span>
+      <span>
+        <input type="text" v-model="username">
+      </span>
+    </div>
+    <div>
+      <span>性别：</span>
+      <span>
+        <input type="radio" id="male" value="1" v-model="gander">
+        <label for="male">男</label>
+        <input type="radio" id="female" value="2" v-model="gander">
+        <label for="male">女</label>
+      </span>
+    </div>
+    <div>
+      <span>爱好：</span>
+      <span>
+        <input type="checkbox" id="ball" value="1" v-model="hobbies">
+        <label for="ball">篮球</label>
+        <input type="checkbox" id="sing" value="2" v-model="hobbies">
+        <label for="ball">唱歌</label>
+        <input type="checkbox" id="code" value="3" v-model="hobbies">
+        <label for="ball">写代码</label>
+      </span>
+    </div>
+    <div>
+      <span>职业：</span>
+      <select multiple v-model="jobs">
+        <option value="0">请选择职业...</option>
+        <option value="1">教师</option>
+        <option value="2">软件工程师</option>
+        <option value="3">律师</option>
+      </select>
+    </div>
+    <div>
+      <span>个人简介：</span>
+      <textarea v-model="intro"></textarea>
+    </div>
+    <div>
+      <input type="submit" @click.prevent="handleForm" value="提交">
+    </div>
+  </form>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          username: "list",
+          gander: "1",
+          hobbies: [],
+          jobs: [],
+          // 个人简介
+          intro: ""
+        }
+      },
+      methods: {
+        handleForm() {
+          console.log(this.username);
+          console.log(this.gander);
+          console.log(this.hobbies);
+          console.log(this.jobs);
+          console.log(this.intro);
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+
+</html>

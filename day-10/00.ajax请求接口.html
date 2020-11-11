@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>按钮</button>
+  <script src="./lib/jquery.js"></script>
+  <script>
+    $('button').click(function () {
+      // jQuery发起Ajax请求
+      // $.ajax({
+      //   // 请求方式
+      //   type: 'get',
+      //   // 请求地址
+      //   url: "http://localhost:3000/data",
+      //   // 发送数据
+      //   data: null,
+      //   // 成功时的回调函数
+      //   success: function (data) {
+      //     console.log(data);
+      //   }
+      // })
+
+    })
+    // Ajax原生发起请求
+    let btn = document.querySelector('button');
+    btn.onclick = function () {
+      // 1.实例化XMLHttpRequest
+      let xhr = new XMLHttpRequest();
+      // 2.设置请求方式 和请求地址
+      xhr.open("GET","http://localhost:3000/data")
+      // 3.设置请求头(get请求不设置请求头 但是POST必须设置)
+      // 4.发送请求数据
+      xhr.send(null);
+      // 5.监听并处理相应
+      xhr.onreadystatechange=function() {
+        // 成功的接收到了一个响应
+        if(xhr.readyState==4&&xhr.status==200) {
+          // 从服务器获取到的数据
+          console.log(xhr.responseText);
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

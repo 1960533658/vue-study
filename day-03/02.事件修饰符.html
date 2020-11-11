@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      width: 500px;
+      height: 500px;
+      background-color: skyblue;
+    }
+
+    .son {
+      width: 200px;
+      height: 200px;
+      background-color: hotpink;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 阻止浏览器默认行为 跳转（加载） -->
+    <a href="htt://www.baidu.com" @click.prevent='handleDefault'>百度</a>
+    <!-- 让事件只能出发一次 -->
+    <button @click.once='handleOnce'>点击</button>
+    <!-- 阻止事件冒泡 -->
+    <div class="father" @click='handleFather'>
+      <div class="son" @click.stop='handleSon'></div>
+    </div>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {}
+      },
+      methods: {
+        handleDefault() {
+          console.log('我是a标签点击之后的效果');
+        },
+        handleOnce() {
+          console.log('我是button标签点击之后的效果');
+        },
+        handleFather() {
+          console.log('我是你爹');
+        },
+        handleSon() {
+          console.log('我想当你爹');
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

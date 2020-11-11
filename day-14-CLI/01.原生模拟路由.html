@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav>
+    <a href="#home">首页</a>
+    <a href="#music">音乐</a>
+    <a href="#about">关于</a>
+  </nav>
+  <main></main>
+  <script>
+    // 当hash发生变化时，自动触犯事件
+    // window.onhashchange = function () {
+    //   // #aaa
+    //   console.log(location.hash);
+    // }
+
+    window.onhashchange = function () {
+      if (location.hash == "#home") {
+        document.querySelector('main').innerHTML = "<div><h2>首页</h2></div>";
+      }
+      if (location.hash == "#music") {
+        document.querySelector('main').innerHTML = "<div><h2>音乐</h2></div>";
+      }
+      if (location.hash == "#about") {
+        document.querySelector('main').innerHTML = "<div><h2>关于</h2></div>";
+      }
+    }
+  </script>
+</body>
+
+</html>

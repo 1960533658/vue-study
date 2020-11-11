@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+    .container .cart {
+      width: 300px;
+      /*background-color: lightgreen;*/
+      margin: auto;
+    }
+
+    .container .title {
+      background-color: lightblue;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      /*color: #fff;*/
+    }
+
+    .container .total {
+      background-color: #FFCE46;
+      height: 50px;
+      line-height: 50px;
+      text-align: right;
+    }
+
+    .container .total button {
+      margin: 0 10px;
+      background-color: #DC4C40;
+      height: 35px;
+      width: 80px;
+      border: 0;
+    }
+
+    .container .total span {
+      color: red;
+      font-weight: bold;
+    }
+
+    .container .item {
+      height: 55px;
+      line-height: 55px;
+      position: relative;
+      border-top: 1px solid #ADD8E6;
+    }
+
+    .container .item img {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+    }
+
+    .container .item .name {
+      position: absolute;
+      width: 90px;
+      top: 0;
+      left: 55px;
+      font-size: 16px;
+    }
+
+    .container .item .change {
+      width: 100px;
+      position: absolute;
+      top: 0;
+      right: 50px;
+    }
+
+    .container .item .change a {
+      font-size: 20px;
+      width: 30px;
+      text-decoration: none;
+      background-color: lightgray;
+      vertical-align: middle;
+    }
+
+    .container .item .change .num {
+      width: 40px;
+      height: 25px;
+    }
+
+    .container .item .del {
+      position: absolute;
+      top: 0;
+      right: 0px;
+      width: 40px;
+      text-align: center;
+      font-size: 40px;
+      cursor: pointer;
+      color: red;
+    }
+
+    .container .item .del:hover {
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 购物车案例的功能
+       1.实现组件化渲染
+       2.实现标题用户名 显示列表数据 根据数据中物品的个数计算总价
+       3.当用户输入是改变数据和页面中的个数 点击X删除当前元素
+       4.实现商品根据商品数量结算总价
+  -->
+  <div id="app">
+
+    <div class="container">
+      <Cart></Cart>
+    </div>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({});
+    // 购物车头部组件
+    let cartTitle = {
+      // 接收用户名称
+      props: ["uname"],
+      template: `<div class="title">{{uname}}的商品</div>`
+    };
+    // 购物车列表组件
+    let cartList = {
+      props: ['list'],
+      template: `
+      <div> 
+        <div v-for="(item,index) in list" :key="item.id">
+          <div class="item">
+            <img :src="item.img" />
+            <div class="name">{{item.name}}</div>
+            <div class="change">
+              <a href="" @click.prevent="sub(item.id)">－</a>
+              <input type="text" class="num" :value="item.num"  @blur="changeNum(item.id,$event)"/>
+              <a href="" @click.prevent="add(item.id)">＋</a>
+            </div>
+            <!-- 子传父--2.定义点击事件出差发父组件的自定义事件cart-Del -->
+            <div class="del" @click="del(item.id)">×</div>
+          </div>
+        </div>
+      </div>
+      `,
+      // 定义子组件触发父组件的方法后的方法
+      methods: {
+        // 子传父--3.通过调用方法的方式在方法内部使用this触发父元素的删除功能
+        del: function (id) {
+          this.$emit('cart-del', id);
+        },
+        // 子传父--5.通过调用方法的方式在方法内部使用失焦事件中受用this触发父元素的自定义事件
+        changeNum(id, event) {
+          this.$emit('change-num', {
+            id: id,
+            // 给父元素传递数字修改时的状态（增加还是减少，还是直接用户输入）
+            type: 'change',
+            num: event.target.value < 0 ? 0 : event.target.value
+          })
+        },
+        add(id) {
+          this.$emit('change-num', {
+            id: id,
+            type: 'add'
+          })
+        },
+        sub(id) {
+          this.$emit('change-num', {
+            id: id,
+            type: 'sub'
+          })
+        }
+      }
+    };
+    // 购物车结算组件
+    let cartTotal = {
+      props: ["list"],
+      computed: {
+        // 根据数据中物品的个数计算总价
+        price() {
+          // 声明总价
+          let sum = 0;
+          this.list.forEach(element => {
+            sum += element.num * element.price
+          });
+          return sum
+        }
+      },
+      template: `
+      <div class="total">
+        <span>总价：{{price}}</span>
+        <button>结算</button>
+      </div>
+      `
+    }
+    // 购物车总组件
+    vm.component('cart', {
+      data() {
+        return {
+          uname: '张三',
+          list: [
+            {
+              id: 1,
+              name: 'TCL彩电',
+              price: 1000,
+              num: 1,
+              img: 'img/a.jpg'
+            },
+            {
+              id: 2,
+              name: '机顶盒',
+              price: 1000,
+              num: 1,
+              img: 'img/b.jpg'
+            },
+            {
+              id: 3,
+              name: '海尔冰箱',
+              price: 1000,
+              num: 1,
+              img: 'img/c.jpg'
+            },
+            {
+              id: 4,
+              name: '小米手机',
+              price: 1000,
+              num: 1,
+              img: 'img/d.jpg'
+            },
+            {
+              id: 5,
+              name: 'PPTV电视',
+              price: 1000,
+              num: 2,
+              img: 'img/e.jpg'
+            }
+          ]
+        }
+      },
+      template: `
+      <div class="cart">
+        <!-- 父传子-- 传递用户名称以显示表头 -->
+        <CartTitle :uname="uname"></CartTitle>
+        <!-- 子传父--1.现在父组件中声明自定义删除方法 输入框失焦事件  -->
+        <CartList :list="list" @cart-del="delCart($event)" @change-num="changeNum($event)"></CartList>
+        <CartTotal :list="list"></CartTotal>
+      </div>
+      `,
+      components: {
+        "CartTitle": cartTitle,
+        "CartList": cartList,
+        "CartTotal": cartTotal
+      },
+      // 定义父组件的自定义方法
+      methods: {
+        delCart(id) {
+          // 子传父--4.需要找到点击的数据的id用以删除数据
+          this.list.splice(this.list.findIndex(item => item.id == id), 1)
+        },
+        // 子传父--6.父元素的自定义方法根据字元素返回的值（id,event)修改数据中的对应的id中的值
+        changeNum(val) {
+          // 要分三种情况来修改值++ -- 和输入
+          if (val.type == 'change') {
+            this.list.some(item => {
+              if (item.id == val.id) {
+                item.num = val.num;
+                return true;
+              }
+            })
+          } else if (val.type == 'add') {
+            this.list.some(item => {
+              if (item.id == val.id) {
+                item.num += 1;
+                return true;
+              }
+            })
+          } else if (val.type == 'sub') {
+            this.list.some(item => {
+              if (item.id == val.id) {
+                if (item.num == 0) {
+                  return
+                }
+                item.num--
+                console.log(item.num);
+                return true;
+              }
+            })
+          }
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

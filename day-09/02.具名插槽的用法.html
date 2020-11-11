@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <toubu>
+    <header>
+      <template v-slot:left>
+        三
+      </template>
+      <template v-slot:center>
+        <input type="text">
+      </template>
+      <template v-slot:right>
+        <button>登录</button>
+      </template>
+      <template v-slot:default>
+        <button>我是匿名插槽</button>
+      </template>
+    </header>
+  </toubu>
+</body>
+<script src="./lib/vue-3.0.js"></script>
+<script>
+  let vm = Vue.createApp({});
+  vm.component('toubu', {
+    template: `
+    <slot name="left">的NSA妈妈端口</slot>
+      <slot name='center'>
+        <h1>我本来input</h1>
+      </slot>
+      <slot name='right'></slot>
+      <slot></slot>
+    `
+  })
+</script>
+
+</html>

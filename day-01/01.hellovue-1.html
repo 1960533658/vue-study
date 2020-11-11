@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">{{msg}}</div>
+  <!-- 链接vue库 -->
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: "hello",
+          name: 'zs',
+          arr: [1, 2, 3]
+        }
+      },
+      methods: {}
+    });
+    vm.mount('#app');
+  </script>
+</body>
+
+</html>

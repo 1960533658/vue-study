@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>{{reverseString}}</div>
+    <div>{{reverseMessage()}}</div>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    /* 
+    计算属性与方法的区别
+      1.computed是基于响应式依赖进行缓存的,触发条件是他的依赖变化了才会执行
+      2.计算属性 不需要主动调用,二methods中的方法就和普通的方法一样需要主动调用
+      3.计算属性是属性,用的时候不用加小括号但必须有返回值 而普通函数则可以有也可以没有,是具体情况而定
+      4.computed会节省大量性能消耗,而不像methods中的方法一样每次调用都执行
+    */
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg: "Nihao"
+        }
+      },
+      methods: {
+        reverseMessage() {
+          return this.msg.split("").reverse().join("");
+        }
+      },
+      computed: {
+        reverseString() {
+          console.log("computed");
+        }
+      }
+    }).mount('#app'); 
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <div>{{msg}}</div> -->
+    <hello></hello>
+  </div>
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    let vm = Vue.createApp({
+      data() {
+        return {
+          msg:"根组件"
+        }
+      },
+      methods: {
+
+      },
+      components:{
+        'hello': {
+          data() {
+            return {
+              msg2:"我是局部组件"
+            }
+          },
+          // 无法获取到根元素中的内同
+          // template:`<div>{{msg}}{{msg2}}</div>`
+          template:`<div>{{msg}}</div>`
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

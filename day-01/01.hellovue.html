@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div></div>
+
+  <div id="app">
+    {{msg}}
+  </div>
+  <!-- 引入vue库文件，当引入之后就会在全局对象window中就有了一个Vue的实例对象 -->
+  <script src="./lib/vue-3.0.js"></script>
+  <script>
+    // 写数据
+    let vm = Vue.createApp({
+      // 有过要存数据
+      data() {
+        return {
+          // 所有页面数据写在这里
+          msg: 'hello Vue',
+          name: 'zs',
+          arr: [1, 2, 3, 4],
+          family: {
+            brother: 'sadsada'
+          }
+          // 内部可以写对象的但是写方法（function）是无效的在methods中写
+        }
+      },
+      // 方法
+      methods: {}
+    })
+    // 写控制器
+    vm.mount('#app')
+    // 1.链接vue库
+    // 2.写数据
+    let vm = vue.createApp({
+      data() {
+        return {
+          msg: 'hello',
+          name: 'zs',
+          arr: [1, 2, 3],
+        }
+
+      },
+      // 内部可以写方法但是，只能写在methods中
+      methods: {}
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let vm = Vue.createApp({
+      // 数据
+      data() {
+        return {
+          id: '',
+          name: "",
+          keywords: "",
+          brandList: [
+            { id: 1, name: '奔驰', ctime: '2020/9/23' },
+            { id: 2, name: '宝马', ctime: '2020/9/23' },
+            { id: 3, name: '千里马', ctime: '2020/9/23' },
+          ]
+        }
+      }, methods: {
+        addBrand() {
+          if (!(this.id.trim() && this.name.trim())) return alert('内容不能为空')
+          let bewBrand = {
+            id: this.id,
+            name: this.name,
+            ctime: new Data().toLocalDateString()
+          }
+          this.brandList.push(newBrand)
+          this.id = "";
+          this.name = "";
+        },
+        // 渲染数据
+        searchBrand() {
+          let result = this.brandList.filter(item => item.name.includes(this.keywords))
+          return result
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

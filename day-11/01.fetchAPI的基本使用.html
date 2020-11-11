@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    Fetch的基本使用
+    fetch(url,options).then();
+    */
+
+    fetch('http://localhost:3000/fdata').then(function (res) {
+      // 打印出来的值并不是一个数据，而是一个promise的实例所以需要return之后再做处理
+      // console.log(res);
+
+      // 帮我们获取到后台返回的数据 是一个promise对象
+      return res.text()
+    }).then(function (data) {
+      // hello fetch
+      console.log(data);
+    })
+  </script>
+</body>
+
+</html>

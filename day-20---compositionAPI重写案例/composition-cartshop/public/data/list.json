@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "TCL彩电",
+    "price": 1000,
+    "num": 1,
+    "img": "/img/a.jpg"
+  },
+  {
+    "id": 2,
+    "name": "机顶盒",
+    "price": 1000,
+    "num": 1,
+    "img": "/img/b.jpg"
+  },
+  {
+    "id": 3,
+    "name": "海尔冰箱",
+    "price": 1000,
+    "num": 1,
+    "img": "/img/c.jpg"
+  },
+  {
+    "id": 4,
+    "name": "小米手机",
+    "price": 1000,
+    "num": 1,
+    "img": "/img/d.jpg"
+  },
+  {
+    "id": 5,
+    "name": "PPTV电视",
+    "price": 1000,
+    "num": 2,
+    "img": "/img/e.jpg"
+  }
+]
